@@ -1,20 +1,21 @@
 <?php
-    $nama = '';
+  include_once('function.php');
+  $nama = '';
     $nim = '';
     $matkul = '';
     $uts = '';
     $uas = '';
     $tugas = '';
     $total = '';
-    if(count($_GET) > 0) {
-        $nama = $_GET['Nama'];
-        $nim = $_GET['NIM'];
-        $matkul = $_GET['Matkul'];
-        $uts = $_GET['UTS'];
-        $uas = $_GET['UAS'];
-        $tugas = $_GET['Tugas'];
-        $total = (30*$uts/100) + (35*$uas/100) + (35*$tugas/100);
-    }
+  if(isset($_POST['submit'])) {
+    $nama = $_POST['Nama'];
+    $nim = $_POST['NIM'];
+    $matkul = $_POST['Matkul'];
+    $uts = $_POST['UTS'];
+    $uas = $_POST['UAS'];
+    $tugas = $_POST['Tugas'];
+    $total = (30*$uts/100) + (35*$uas/100) + (35*$tugas/100);
+  }
 ?>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -37,7 +38,7 @@
   <body>
 <div class="container py-5">
     <h2 class="mb-3">Form Nilai</h2>
-<form method="GET" action="">
+<form method="POST" action="">
   <div class="form-row">
     <div class="col-md-4 mb-3">
       <label for="validationServer013">Nama :</label>
@@ -69,7 +70,7 @@
         required name="Tugas">
     </div>
   </div>
-  <button class="btn btn-primary" type="submit">Submit form</button>
+  <button class="btn btn-primary" type="submit" name="submit">Submit form</button>
 </form>
 <div class="mt-5">
     <h2 class="mb-3">Hasil :</h2>
@@ -108,6 +109,16 @@
             <td><strong>Total</strong></td>
             <td>:</td>
             <td><strong><?= $total ?></strong></td>
+        </tr>
+        <tr>
+            <td>Predikat</td>
+            <td>:</td>
+            <td><?= predikat($total) ?></td>
+        </tr>
+        <tr>
+            <td>Ip</td>
+            <td>:</td>
+            <td><?= ip($total) ?></td>
         </tr>
     </table>
 </div>
